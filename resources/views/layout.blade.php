@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Laravel BBS</title>
+    <title>AI人生相談</title>
 
     <link
         rel="stylesheet"
@@ -15,7 +15,7 @@
     <header class="navbar navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url('bbs') }}">
-                Laravel BBS
+                AI人生相談
             </a>
 
 

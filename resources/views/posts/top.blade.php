@@ -46,7 +46,7 @@
       </div>
       <div class="cover text-white text-center py-4">
        <h1 class="display-4 mb-5">AI（あきらかにインチキ）人生相談</h1>
-       <a href="" class="btn btn-primary btn-lg">新規登録!</a>
+       <a href="/register" class="btn btn-primary btn-lg">新規登録!</a>
      </div>
     </herder>
     <main>
@@ -115,7 +115,7 @@
    </section>
 
      <section class="bg-light text-center py-5">
-      <a href="" class="btn btn-primary btn-lg">新規登録</a>
+      <a href="/register" class="btn btn-primary btn-lg">新規登録</a>
      </section>
   </main>
   <footer class="text-center text-muted py-4">

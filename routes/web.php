@@ -14,10 +14,9 @@
 Route::get('/', 'PostsController@index');
 Route::get('/bbs', 'PostsController@bbs')->name('bbsTop');
 Route::resource('posts', 'PostsController', ['only' => ['create','store','show','edit','update','destroy']]);
-Route::resource('comments','CommentsController',['only'=>['store']]);
+Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();

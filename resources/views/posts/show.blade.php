@@ -48,14 +48,14 @@
         </div>
     </div>
 
-<form class="m-4" method="POST" action="{{route('comments.store')}}">
+<form class="m-4" method="POST" action="{{ route('comments.store') }}">
 @csrf
 
   <input
     namde="post_id"
     type="hidden"
     value="{{$post->id}}"
->
+ >
 
 <div class="form-group">
   <label for="body">
