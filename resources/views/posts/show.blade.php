@@ -33,17 +33,17 @@
             　</h2>
 
             @forelse($post->comments as $comment)
-             <div class="border-top p-4">
-               <time class="text-secondary">
-                 {{$comment->created_at->format('Y.m.d H:i')}}
-              </time>
-              <p class="mt-2">
-                {!! nl2br(e($comment->body)) !!}
-              </p>
-            </div>
-          @empty
-          <p>コメントはまだありません。</p>
-          @endforelse
+                     <div class="border-top p-4">
+                         <time class="text-secondary">
+                             {{ $comment->created_at->format('Y.m.d H:i') }}
+                         </time>
+                         <p class="mt-2">
+                             {!! nl2br(e($comment->body)) !!}
+                         </p>
+                     </div>
+                 @empty
+                     <p>コメントはまだありません。</p>
+                 @endforelse
         </section>
         </div>
     </div>
