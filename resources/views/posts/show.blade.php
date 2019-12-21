@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('content')
+
+
     <div class="container mt-4">
         <div class="border p-4">
           <div class="mb-4 text-right">
@@ -48,39 +50,38 @@
         </div>
     </div>
 
-<form class="m-4" method="POST" action="{{ route('comments.store') }}">
-@csrf
+    <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
+        @csrf
 
-  <input
-    namde="post_id"
-    type="hidden"
-    value="{{$post->id}}"
- >
+        <input
+            name="post_id"
+            type="hidden"
+            value="{{ $post->id }}"
+        >
 
-<div class="form-group">
-  <label for="body">
-    本文
-  </label>
+        <div class="form-group">
+            <label for="body">
+                本文
+            </label>
 
-  <textarea
-    id="body"
-    name="body"
-    class="form-control {{$errors->has('body')?'is-invalid':''}}"
-    row="4"
-    >{{old('body')}}</textarea>
-    @if ($errors->has('body'))
-    <div class="invalid-feedback">
-      {{$errors->first('body') }}
-    </div>
-    @endif
-  </div>
+            <textarea
+                id="body"
+                name="body"
+                class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}"
+                rows="4"
+            >{{ old('body') }}</textarea>
+            @if ($errors->has('body'))
+                <div class="invalid-feedback">
+                    {{ $errors->first('body') }}
+                </div>
+            @endif
+        </div>
 
-  <div class="mt-4">
-    <button type="submit" class="btn btn-primary">
-      コメントする
-    </button>
-  </div>
-</form>
-
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+                10文字以内で回答して下さい
+            </button>
+        </div>
+    </form>
 
 @endsection

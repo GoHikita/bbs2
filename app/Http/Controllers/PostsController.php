@@ -49,10 +49,10 @@ public function show($post_id)
 public function edit($post_id)
 {
   $post=Post::findOrFail($post_id);
-
-  return view('posts.edit',[
-    'post'=>$post,
-  ]);
+  $this->authorize('edit', $post);
+  return view('posts.edit', [
+        'post' => $post,
+    ]);
 }
 
 public function update($post_id,Request $request)
