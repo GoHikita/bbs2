@@ -49,7 +49,6 @@ public function show($post_id)
 public function edit($post_id)
 {
   $post=Post::findOrFail($post_id);
-  $this->authorize('edit', $post);
   return view('posts.edit', [
         'post' => $post,
     ]);
@@ -63,7 +62,6 @@ public function update($post_id,Request $request)
   ]);
 $post=Post::findOrFail($post_id);
 $post->fill($params)->save();
-
 return redirect()->route('posts.show',['post'=>$post]);
 }
 
