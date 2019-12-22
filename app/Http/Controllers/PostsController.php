@@ -20,13 +20,13 @@ class PostsController extends Controller
       return view('posts.bbs',['posts'=>$posts]);
     }
 
-public function create()
-{
+    public function create()
+    {
     return view('posts.create');
-}
+    }
 
-public function store(Request $request)
-{
+    public function store(Request $request)
+    {
     $params = $request->validate([
         'title' => 'required|max:50',
         'body' => 'required|max:2000',
@@ -35,47 +35,49 @@ public function store(Request $request)
     Post::create($params);
 
     return redirect()->route('bbsTop');
-}
+    }
 
-public function show($post_id)
-{
-  $post=Post::findOrFail($post_id);
+    public function show($post_id)
+    {
+      $post=Post::findOrFail($post_id);
 
-  return view('posts.show',[
-    'post'=>$post,
-  ]);
-}
+      return view('posts.show',[
+        'post'=>$post,
+      ]);
+    }
 
-public function edit($post_id)
-{
-  $post=Post::findOrFail($post_id);
-  return view('posts.edit', [
+    public function edit($post_id)
+    {
+      $post=Post::findOrFail($post_id);
+      $this->authorize('edit', $post);
+      return view('posts.edit', [
         'post' => $post,
     ]);
-}
+    }
 
-public function update($post_id,Request $request)
-{
-  $params=$request->validate([
+    public function update($post_id,Request $request)
+    {
+      $params=$request->validate([
     'title'=>'required|max:50',
     'body'=>'required|max:2000',
-  ]);
-$post=Post::findOrFail($post_id);
-$post->fill($params)->save();
-return redirect()->route('posts.show',['post'=>$post]);
-}
+    ]);
+    $post=Post::findOrFail($post_id);
+    $post->fill($params)->save();
+    $this->authorize('update', $post);
+    return redirect()->route('posts.show',['post'=>$post]);
+    }
 
-public function destroy($post_id)
-{
-  $post=Post::findOrFail($post_id);
+    public function destroy($post_id)
+    {
+      $post=Post::findOrFail($post_id);
 
-  \DB::transaction(function() use ($post){
+      \DB::transaction(function() use ($post){
     $post->comments()->delete();
     $post->delete();
-  });
+    });
 
-  return redirect()->route('bbsTop');
-}
+    return redirect()->route('bbsTop');
+    }
 
 
-}
+    }

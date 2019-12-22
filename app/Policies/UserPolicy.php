@@ -19,5 +19,13 @@ class UserPolicy
         //
     }
 
+    public function edit(User $user, User $model)
+   {
+       return $user->id == $model->id;
+   }
 
+    public function update(User $user, Post $model)
+     {
+         return $user->id == $model->id;
+     }
 }
