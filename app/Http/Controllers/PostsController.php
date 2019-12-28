@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-
+use App\Http\Controllers\Controller;
 class PostsController extends Controller
 {
     public function index()
@@ -16,7 +16,6 @@ class PostsController extends Controller
     public function bbs()
     {
       $posts = Post::with(['comments'])->orderBy('created_at', 'desc')->paginate(10);
-
       return view('posts.bbs',['posts'=>$posts]);
     }
 
@@ -32,7 +31,8 @@ class PostsController extends Controller
         'body' => 'required|max:2000',
     ]);
 
-    Post::create($params);
+        auth()->user()->posts()->create($params);
+        //Post::create($params);
 
     return redirect()->route('bbsTop');
     }
@@ -48,6 +48,7 @@ class PostsController extends Controller
 
     public function edit($post_id)
     {
+
       $post=Post::findOrFail($post_id);
       $this->authorize('edit', $post);
       return view('posts.edit', [
@@ -62,14 +63,15 @@ class PostsController extends Controller
     'body'=>'required|max:2000',
     ]);
     $post=Post::findOrFail($post_id);
-    $post->fill($params)->save();
     $this->authorize('update', $post);
+    $post->fill($params)->save();
     return redirect()->route('posts.show',['post'=>$post]);
     }
 
     public function destroy($post_id)
     {
       $post=Post::findOrFail($post_id);
+      $this->authorize('edit', $post);
 
       \DB::transaction(function() use ($post){
     $post->comments()->delete();

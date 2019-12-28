@@ -21,14 +21,24 @@ class PostPolicy
 
     public function edit(User $user, Post $post)
      {
-         return $user->id === $post->user_id;
+       //dump($user->id);
+       //dd($post->user_id);
+       return $user->id == $post->user_id;
      }
 
    public function update(User $user, Post $post)
      {
-         return $user->id === $post->user_id;
+         return $user->id == $post->user_id;
      }
 
+     public function destroy(User $user, Post $post)
+       {
+           return $user->id == $post->user_id;
+       }
 
+       public function before($user, $ability)
+   {
+       return $user->isAdmin() ? true : null;
+   }
 
 }

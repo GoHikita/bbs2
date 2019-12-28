@@ -5,11 +5,11 @@
 
     <div class="container mt-4">
         <div class="border p-4">
+        @can('edit', $post)
           <div class="mb-4 text-right">
             <a class="btn btn-primary" href="{{route('posts.edit',['post'=>$post])}}">
               編集する
             </a>
-
           <form
           style="display: inline-block;"
           method="POST"
@@ -21,6 +21,7 @@
           <button class="btn btn-danger">削除する</button>
         </form>
         </div>
+       @endcan
             <h1 class="h5 mb-4">
                 {{$post->title}}
             </h1>
@@ -31,7 +32,7 @@
 
             <section>
               <h2 class="h5 mb-4">
-                コメント
+                アドバイス
             　</h2>
 
             @forelse($post->comments as $comment)
@@ -44,13 +45,13 @@
                          </p>
                      </div>
                  @empty
-                     <p>コメントはまだありません。</p>
+                     <p>アドバイスはまだありません。</p>
                  @endforelse
         </section>
         </div>
     </div>
 
-    <form class="mb-4" method="POST" action="{{ route('comments.store') }}">
+    <form class="form-inline mt-5 mx-auto " style="width: 600px;" method="POST" action="{{ route('comments.store') }}">
         @csrf
 
         <input
@@ -59,28 +60,26 @@
             value="{{ $post->id }}"
         >
 
-        <div class="form-group">
-            <label for="body">
-                本文
-            </label>
-
+        <div class="form-group p-5" >
+          <button type="submit" class="btn btn-primary">
+              10文字以内でアドバイスを送る
+          </button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <textarea
                 id="body"
                 name="body"
                 class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}"
-                rows="4"
+                rows="1"
             >{{ old('body') }}</textarea>
             @if ($errors->has('body'))
                 <div class="invalid-feedback">
                     {{ $errors->first('body') }}
                 </div>
             @endif
-        </div>
+        <!--</div>-->
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
-                10文字以内で回答して下さい
-            </button>
+      <!--  <div class="w-auto p-5"> -->
+
         </div>
     </form>
 

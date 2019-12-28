@@ -38,9 +38,14 @@ class User extends Authenticatable
     ];
 
     public function posts()
-  {
+    {
       return $this->hasMany('App\Post');
   }
 
-  
+  public function isAdmin($id = null) {
+       $id = ($id) ? $id : $this->id;
+       return $id == config('admin_id');
+   }
+
+
 }
